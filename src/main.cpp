@@ -5,7 +5,7 @@ using namespace vex;
 
 competition Competition;
 
-auto myLights = sylib::Addrled(22, 6, 64);
+auto LEDs = sylib::Addrled(22, 6, 64); //Creates LEDs sylib object
 
 void initialize() {
   sylib::initialize();
@@ -39,7 +39,10 @@ void usercontrol(void) {
 
 int main() {
   sylib::initialize();
-  myLights.turn_on();
-  myLights.set_all(purple);
+  LEDs.turn_on();
+  // myLights.set_all(purple);
+  // wait(2,sec);
+  LEDs.gradient(purple, white,64,0);
+  LEDs.cycle(*LEDs,10,0);
   vexcodeInit();
 }

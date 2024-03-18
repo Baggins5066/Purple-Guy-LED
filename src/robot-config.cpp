@@ -28,7 +28,6 @@ brain  Brain;
   digital_out barrierHanger = digital_out(Brain.ThreeWirePort.D);
   digital_out leftWing = digital_out(Brain.ThreeWirePort.C);
   digital_out rightWing = digital_out(Brain.ThreeWirePort.B);
-  digital_out LEDs = digital_out(Brain.ThreeWirePort.E);
   
 // VEXcode generated functions
 // define variable for remote controller enable/disable
