@@ -92,7 +92,7 @@ void usercontrol(void) {
   Cata.setStopping(coast);
   Cata.setVelocity(100, percent);
   while (true) {
-    coreColor = cataSensor.color();
+    // coreColor = cataSensor.color();
     Controller1.ButtonL1.pressed(shootTriball);
     leftDriveLEDs.set_pixel(LDColor,0);
     leftDriveLEDs.rotate(1,false);
@@ -100,21 +100,30 @@ void usercontrol(void) {
     rightDriveLEDs.rotate(1,false);
     coreLEDs.set_pixel(coreColor,0);
     coreLEDs.rotate(1,false);
-    if (Controller1.Axis1.position() > 25) {
+    if (((Controller1.Axis3.position() > 25) or (Controller1.Axis3.position() < -25)) and !((Controller1.Axis1.position() < -25) or (Controller1.Axis1.position() > 25))) {
+      LDColor = white;
       RDColor = white;
     }
-    else {
-      RDColor = coreColor;
+    else if ((Controller1.Axis1.position() < -25) and !((Controller1.Axis3.position() > 25) or (Controller1.Axis3.position() < -25))) {
+      LDColor = orange;
+      RDColor = purple;
     }
-    if (Controller1.Axis1.position() < -25) {
+    else if ((Controller1.Axis1.position() > 25) and !((Controller1.Axis3.position() > 25) or (Controller1.Axis3.position() < -25))) {
+      LDColor = purple;
+      RDColor = orange;
+    }
+    else if ((Controller1.Axis1.position() < -25) and ((Controller1.Axis3.position() > 25) or (Controller1.Axis3.position() < -25))) {
+      LDColor = orange;
+      RDColor = white;
+    }
+    else if ((Controller1.Axis1.position() > 25) and ((Controller1.Axis3.position() > 25) or (Controller1.Axis3.position() < -25))) {
       LDColor = white;
+      RDColor = orange;
     }
     else {
-      LDColor = coreColor;
+      LDColor = purple;
+      RDColor = purple;
     }
-
-    // std::uint32_t clock = sylib::millis();
-    // sylib::delay_until(&clock, 10);
     wait(10, msec); 
   }
 }
